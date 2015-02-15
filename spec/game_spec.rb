@@ -13,7 +13,13 @@ describe Game do
       expect(game.dictionary.has_word?('aratherunorthodoxword')).to eq(true)
       expect(game.player.name).to eq('John')
     end
-    
+
+    it 'will default to standard dictionary and default human player if no args passed' do
+      game = Game.new
+      player_name = Player.new.name
+      expect(game.dictionary.has_word?('aratherunorthodoxword')).to eq(false)
+      expect(game.player.name).to eq(player_name)
+    end
   end
 
 end
