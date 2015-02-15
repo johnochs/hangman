@@ -11,6 +11,10 @@ class Dictionary
     @words.has_key?(word)
   end
 
+  def random_word
+    @words.keys.sample
+  end
+
   private
 
   def populate(path)
