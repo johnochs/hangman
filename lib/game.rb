@@ -26,4 +26,17 @@ class Game
     (letter_arr & @player.guessed_letters).size == letter_arr.size
   end
 
+  def render(secret_word)
+    result_string = "Board: "
+
+    secret_word.each_char do |c|
+      if @player.guessed_letters.include?(c)
+        result_string << c
+      else
+        result_string << '_'
+      end
+    end
+    result_string
+  end
+
 end
