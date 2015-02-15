@@ -1,8 +1,11 @@
+#Keeping in mind: public API for Player will later need to be identical
+#to the one for the AI player.
+
 class Player
 
   attr_reader :name, :score, :guessed_letters, :guessed_words
 
-  def initialize(name = "Bob")
+  def initialize(name = "Human")
     @name = name
     @score = 0
     @guessed_letters = []
@@ -19,6 +22,10 @@ class Player
     end
 
     input
+  end
+
+  def wrong_answer
+    @score < 4 ? @score += 1 : @score = 25
   end
 
   private
