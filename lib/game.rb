@@ -9,4 +9,8 @@ class Game
     @dictionary = dictionary
     @player = player
   end
+
+  def start_game
+    secret_word = @dictionary.random_word
+  end
 end
