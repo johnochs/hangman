@@ -2,9 +2,9 @@ require 'dictionary'
 
 describe Dictionary do
 
-  describe '#initialze' do
+  subject(:dict) { Dictionary.new('./lib/test_words.txt') }
 
-    subject(:dict) { Dictionary.new('./lib/test_words.txt') }
+  describe '#initialize' do
 
     #TODO: Find out why this test is failing...
     it 'reads in a file' do
@@ -22,6 +22,17 @@ describe Dictionary do
 
     it 'cleans data so it only contains lower-cased words' do
       expect(dict.words.keys.all? { |w| w.downcase == w }).to eq(true)
+    end
+  end
+
+  describe '#has_word?' do
+
+    it 'returns true if word is in dictionary' do
+      expect(dict.has_word?('cat')).to eq(true)
+    end
+
+    it 'returns false if word is not in dictionary' do
+      expect(dict.has_word?('kitty')).to eq(false)
     end
   end
 
