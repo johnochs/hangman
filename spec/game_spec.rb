@@ -33,7 +33,7 @@ describe Game do
     it 'picks a random word from its dictionary' do
       dict_double = double(dictionary, random_word: true)
       expect(dict_double).to receive(:random_word)
-      Game.new(dict_double, Player.new)
+      Game.new(dict_double, Player.new).start_game
     end
   end
 
