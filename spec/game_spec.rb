@@ -79,6 +79,28 @@ describe Game do
     end
   end
 
-  
+  describe "#render" do
+
+    it "displays an empty board properly" do
+      player_double = double
+      allow(player_double).to receive(:guessed_letters).and_return(['r','p','m'])
+      game = Game.new(dictionary, player_double)
+      expect(game.render('scout')).to match(/Board: _*/)
+    end
+
+    it 'displays a partially filled board properly' do
+      player_double = double
+      allow(player_double).to receive(:guessed_letters).and_return(['s','u','o'])
+      game = Game.new(dictionary, player_double)
+      expect(game.render('scout')).to match(/Board: s_ou_/)
+    end
+
+    it 'displays a fully filled board properly' do
+      player_double = double
+      allow(player_double).to receive(:guessed_letters).and_return(['s','u','o','c','t'])
+      game = Game.new(dictionary, player_double)
+      expect(game.render('scout')).to match(/Board: scout/)
+    end
+  end
 
 end
