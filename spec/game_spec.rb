@@ -28,7 +28,7 @@ describe Game do
     end
   end
 
-  describe '#start' do
+  describe '#start_game' do
 
     it 'picks a random word from its dictionary' do
       dict_double = double(dictionary, random_word: true)
