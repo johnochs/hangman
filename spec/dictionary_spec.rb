@@ -36,4 +36,19 @@ describe Dictionary do
     end
   end
 
+  describe '#random_word' do
+
+    #TODO: There should probably be a more statistically oriented way to do this
+    it 'all words are accessible' do
+      d = dict
+      sampled_words = Hash.new { |h,k| h[k] = true}
+
+      1000.times do
+        sampled_words[d.random_word]
+      end
+
+      expect(d.words.keys.size).to eq(sampled_words.keys.size)
+    end
+  end
+
 end
