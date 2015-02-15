@@ -38,6 +38,7 @@ describe Game do
       expect(dict_double).to receive(:random_word)
       game = Game.new(dict_double, Player.new)
       game.stub(:tick) { 'true' }
+      game.stub(:game_over?) { 'true' }
       game.start_game
     end
   end
