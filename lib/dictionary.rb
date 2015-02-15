@@ -7,6 +7,10 @@ class Dictionary
     populate(path)
   end
 
+  def has_word?(word)
+    @words.has_key?(word)
+  end
+
   private
 
   def populate(path)
