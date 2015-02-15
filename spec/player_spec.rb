@@ -90,4 +90,23 @@ describe Player do
 
   end
 
+  describe "#wrong_answer" do
+
+    it "adds a point to their score if their score is < 5" do
+      p = player
+      expect(p.score).to eq(0)
+      expect(p.wrong_answer).to eq(1)
+    end
+
+    it "returns 25 if their score is > 4" do
+      p = player
+      4.times do
+        p.wrong_answer
+      end
+      expect(p.score).to eq(4)
+      expect(p.wrong_answer).to eq(25)
+    end
+    
+  end
+
 end
