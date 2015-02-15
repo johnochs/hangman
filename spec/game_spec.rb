@@ -10,6 +10,8 @@ describe Game do
 
   subject(:dictionary) { Dictionary.new('./lib/test_words.txt') }
 
+  subject(:player) { Player.new('Test Player') }
+
   describe '#initialize' do
 
     it 'can take custom dictionary and player as arguments' do
@@ -31,9 +33,22 @@ describe Game do
   describe '#start_game' do
 
     it 'picks a random word from its dictionary' do
-      dict_double = double(dictionary, random_word: true)
+      dict_double = double
+      allow(dict_double).to receive(:random_word).and_return('helium')
       expect(dict_double).to receive(:random_word)
-      Game.new(dict_double, Player.new).start_game
+      game = Game.new(dict_double, Player.new)
+      game.stub(:tick) { 'true' }
+      game.start_game
+    end
+  end
+
+  describe '#game_over?' do
+
+    it 'returns false when player has < max # points && has not guessed secret' do
+      player_double = double
+      allow(player_double).to receive(:score).and_return(2)
+      allow(player_double).to receive(:guessed_letters).and_return(['a', 'c'])
+      expect(game.game_over?('cat')).to eq(false)
     end
   end
 
