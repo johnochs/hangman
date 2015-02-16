@@ -48,4 +48,13 @@ class Game
     end
   end
 
+  def good_guess?(secret_word, guess)
+    if guess.length > 1
+      secret_word == guess
+    else
+      secret_word.index(guess).nil? ? false : true
+    end
+  end
+
+
 end
