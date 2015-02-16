@@ -110,7 +110,7 @@ describe Game do
       allow(player_double).to receive(:guess)
       expect(player_double).to receive(:guess)
       game = Game.new(dictionary, player_double)
-      game.tick
+      game.tick('someword')
     end
 
   end
