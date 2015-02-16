@@ -103,4 +103,16 @@ describe Game do
     end
   end
 
+  describe "#tick" do
+
+    it 'gets player input' do
+      player_double = double
+      allow(player_double).to receive(:guess)
+      expect(player_doube).to recieve(:guess)
+      game = Game.new(dictionary, player_double)
+      game.tick
+    end
+
+  end
+
 end
