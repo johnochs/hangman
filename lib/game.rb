@@ -41,6 +41,11 @@ class Game
 
   def tick(secret_word)
     guess = @player.guess
+    if good_guess?(secret_word, guess)
+      @player.right_answer
+    else
+      @player.wrong_answer
+    end
   end
 
 end
