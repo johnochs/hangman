@@ -28,6 +28,9 @@ class Player
     @score < 4 ? @score += 1 : @score = 25
   end
 
+  def right_answer
+  end
+
   private
 
   LETTERS = ('a'..'z').to_a
