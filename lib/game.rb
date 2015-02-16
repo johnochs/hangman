@@ -39,4 +39,8 @@ class Game
     result_string
   end
 
+  def tick
+    guess = @player.guess
+  end
+
 end
