@@ -8,36 +8,43 @@ class Game
 
   attr_reader :dictionary, :player
 
-  def initialize(dictionary = Dictionary.new, player = Player.new)
-    @dictionary = dictionary
-    @player = player
+  def initialize(options = {})
+    defaults = {dictionary: Dictionary.new, player: Player.new, quiet: false}
+    options = defaults.merge(options)
+    @dictionary = options[:dictionary]
+    @player = options[:player]
+    @quiet = options[:quiet]
   end
 
   def start_game
     secret_word = @dictionary.random_word
     @player.register_word_length(secret_word.length)
-    system('clear')
-    puts "Welcome to Hangman, #{@player.name}!"
+    system('clear') unless @quiet
+    puts "Welcome to Hangman, #{@player.name}!" unless @quiet
 
     until game_over?(secret_word)
+      unless @quiet
       puts ""
-      puts "Your guessed words: " +
-        (@player.guessed_words.empty? ? "None yet." : @player.guessed_words.join(', '))
-      puts "Your guessed letters: " +
-        (@player.guessed_letters.empty? ? "None yet." : @player.guessed_letters.join(', '))
-      puts "Your score: " + @player.score.to_s
-      puts "Board: " + render(secret_word)
+        puts "Your guessed words: " +
+          (@player.guessed_words.empty? ? "None yet." : @player.guessed_words.join(', '))
+        puts "Your guessed letters: " +
+          (@player.guessed_letters.empty? ? "None yet." : @player.guessed_letters.join(', '))
+        puts "Your score: " + @player.score.to_s
+        puts "Board: " + render(secret_word)
+      end
       tick(secret_word)
     end
 
-    puts
+    puts unless @quiet
     if @player.score < 5
-      puts "Congratulations, #{@player.name}!  You won!"
+      puts "Congratulations, #{@player.name}!  You won!" unless @quiet
     else
-      puts "Sorry, #{@player.name}.  This just wasn't your game."
+      puts "Sorry, #{@player.name}.  This just wasn't your game." unless @quiet
     end
-    puts "Final Score: #{@player.score}"
-    puts "Word: #{secret_word}"
+    unless @quiet
+      puts "Final Score: #{@player.score}"
+      puts "Word: #{secret_word}"
+    end
   end
 
   def game_over?(secret_word)
@@ -61,14 +68,14 @@ class Game
   end
 
   def tick(secret_word)
-    print "Enter your guess (word or letter): "
+    print "Enter your guess (word or letter): " unless @quiet
     guess = @player.guess
-    system('clear')
+    system('clear') unless @quiet
     if good_guess?(secret_word, guess)
-      puts "Good guess!"
+      puts "Good guess!" unless @quiet
       @player.right_answer(render(secret_word))
     else
-      puts "Nope. :("
+      puts "Nope. :(" unless @quiet
       @player.wrong_answer
     end
   end
