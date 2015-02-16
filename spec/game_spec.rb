@@ -85,21 +85,21 @@ describe Game do
       player_double = double
       allow(player_double).to receive(:guessed_letters).and_return(['r','p','m'])
       game = Game.new(dictionary, player_double)
-      expect(game.render('scout')).to match(/Board: _*/)
+      expect(game.render('scout')).to match(/_*/)
     end
 
     it 'displays a partially filled board properly' do
       player_double = double
       allow(player_double).to receive(:guessed_letters).and_return(['s','u','o'])
       game = Game.new(dictionary, player_double)
-      expect(game.render('scout')).to match(/Board: s_ou_/)
+      expect(game.render('scout')).to match(/s_ou_/)
     end
 
     it 'displays a fully filled board properly' do
       player_double = double
       allow(player_double).to receive(:guessed_letters).and_return(['s','u','o','c','t'])
       game = Game.new(dictionary, player_double)
-      expect(game.render('scout')).to match(/Board: scout/)
+      expect(game.render('scout')).to match(/scout/)
     end
   end
 
