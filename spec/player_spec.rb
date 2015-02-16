@@ -106,7 +106,19 @@ describe Player do
       expect(p.score).to eq(4)
       expect(p.wrong_answer).to eq(25)
     end
-    
+
+  end
+
+  describe '#right_answer' do
+    it "doesn't do anything" do
+      a_player = player
+      b_player = a_player.clone
+      b_player.right_answer
+      expect(a_player.name).to eq(b_player.name)
+      expect(a_player.score).to eq(b_player.score)
+      expect(a_player.guessed_letters).to eq(b_player.guessed_letters)
+      expect(a_player.guessed_words).to eq(b_player.guessed_words)
+    end
   end
 
 end
