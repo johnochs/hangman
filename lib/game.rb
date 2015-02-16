@@ -16,7 +16,7 @@ class Game
     secret_word = @dictionary.random_word
 
     until game_over?(secret_word)
-      tick
+      tick(secret_word)
     end
   end
 
@@ -27,7 +27,7 @@ class Game
   end
 
   def render(secret_word)
-    result_string = "Board: "
+    result_string = ""
 
     secret_word.each_char do |c|
       if @player.guessed_letters.include?(c)
@@ -39,7 +39,7 @@ class Game
     result_string
   end
 
-  def tick
+  def tick(secret_word)
     guess = @player.guess
   end
 
