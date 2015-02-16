@@ -30,10 +30,12 @@ class Game
 
     puts
     if @player.score < 5
-      puts "Congratulations!  You won!"
+      puts "Congratulations, #{@player.name}!  You won!"
     else
-      puts "Sorry.  This just wasn't your game.  The word was #{secret_word}"
+      puts "Sorry, #{@player.name}.  This just wasn't your game. \n
+            The word was #{secret_word}"
     end
+    puts "Final Score: #{@player.score}"
   end
 
   def game_over?(secret_word)
