@@ -37,8 +37,8 @@ describe Game do
       allow(dict_double).to receive(:random_word).and_return('helium')
       expect(dict_double).to receive(:random_word)
       game = Game.new(dict_double, Player.new)
-      game.stub(:tick) { 'true' }
-      game.stub(:game_over?) { 'true' }
+      game.stub(:tick) { true }
+      game.stub(:game_over?) { true }
       game.start_game
     end
   end
@@ -108,9 +108,59 @@ describe Game do
     it 'gets player input' do
       player_double = double
       allow(player_double).to receive(:guess)
+      allow(player_double).to receive(:right_answer)
       expect(player_double).to receive(:guess)
       game = Game.new(dictionary, player_double)
+      game.stub(:good_guess?) { true }
       game.tick('someword')
+    end
+
+    context "with a good word or letter received from the player" do
+
+      it 'calls player#right_answer (letter)' do
+        player_double = double
+        allow(player_double).to receive(:guess).and_return('c')
+        allow(player_double).to receive(:right_answer)
+        game = Game.new(dictionary, player_double)
+        expect(player_double).to receive(:right_answer)
+        game.stub(:good_guess?) { true }
+        game.tick('cat')
+      end
+
+      it 'calls player#right_answer (word)' do
+        player_double = double
+        allow(player_double).to receive(:guess).and_return('cat')
+        allow(player_double).to receive(:right_answer)
+        game = Game.new(dictionary, player_double)
+        expect(player_double).to receive(:right_answer)
+        game.stub(:good_guess?) { true }
+        game.tick('cat')
+      end
+
+    end
+
+    context "with a bad word or letter received from the player" do
+
+      it 'calls player#wrong_answer (letter)' do
+        player_double = double
+        allow(player_double).to receive(:guess).and_return('c')
+        allow(player_double).to receive(:wrong_answer)
+        game = Game.new(dictionary, player_double)
+        expect(player_double).to receive(:wrong_answer)
+        game.stub(:good_guess?) { false }
+        game.tick('bat')
+      end
+
+      it 'calls player#right_answer (word)' do
+        player_double = double
+        allow(player_double).to receive(:guess).and_return('cat')
+        allow(player_double).to receive(:wrong_answer)
+        game = Game.new(dictionary, player_double)
+        expect(player_double).to receive(:wrong_answer)
+        game.stub(:good_guess?) { false }
+        game.tick('bat')
+      end
+      
     end
 
   end
