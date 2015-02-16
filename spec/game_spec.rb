@@ -126,6 +126,7 @@ describe Game do
       expect(player_double).to receive(:guess)
       game = Game.new(dictionary, player_double)
       game.stub(:good_guess?) { true }
+      game.stub(:render) { '____' }
       game.tick('someword')
     end
 
@@ -138,6 +139,7 @@ describe Game do
         game = Game.new(dictionary, player_double)
         expect(player_double).to receive(:right_answer)
         game.stub(:good_guess?) { true }
+        game.stub(:render) { '____' }
         game.tick('cat')
       end
 
@@ -148,6 +150,7 @@ describe Game do
         game = Game.new(dictionary, player_double)
         expect(player_double).to receive(:right_answer)
         game.stub(:good_guess?) { true }
+        game.stub(:render) { '____' }
         game.tick('cat')
       end
 
