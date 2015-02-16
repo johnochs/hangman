@@ -20,7 +20,9 @@ class ComputerPlayer
 
   def register_word_length(length)
     @filter = create_regexp('_' * length)
-    @possible_words = @dictionary.words.delete_if { |k, v| k.length != length }
+    @possible_words = @dictionary.words.dup.delete_if do
+       |k, v| k.length != length
+     end
   end
 
   def wrong_answer
