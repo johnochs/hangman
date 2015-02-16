@@ -14,18 +14,21 @@ class Game
 
   def start_game
     secret_word = @dictionary.random_word
-    puts "Welcome to Hangman!"
+    system('clear')
+    puts "Welcome to Hangman, #{@player.name}!"
 
     until game_over?(secret_word)
-      puts "Your guessed words: "
-      print @player.guessed_words.empty? ? "None yet." : @player.guessed_words.join(' ')
-      puts "Your guessed letters: "
-      print @player.guessed_letters.empty? ? "None yet." : @player.guessed_letters.join(' ')
+      puts ""
+      puts "Your guessed words: " +
+        (@player.guessed_words.empty? ? "None yet." : @player.guessed_words.join(', '))
+      puts "Your guessed letters: " +
+        (@player.guessed_letters.empty? ? "None yet." : @player.guessed_letters.join(', '))
       puts "Your score: " + @player.score.to_s
       puts "Board: " + render(secret_word)
       tick(secret_word)
     end
 
+    puts
     if @player.score < 5
       puts "Congratulations!  You won!"
     else
@@ -53,8 +56,9 @@ class Game
   end
 
   def tick(secret_word)
-    puts "Enter your guess (word or letter): "
+    print "Enter your guess (word or letter): "
     guess = @player.guess
+    system('clear')
     if good_guess?(secret_word, guess)
       puts "Good guess!"
       @player.right_answer
