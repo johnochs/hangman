@@ -38,6 +38,7 @@ class Game
 
   def game_over?(secret_word)
     return true if @player.score >= POINTS_TO_END_GAME
+    return true if @player.guessed_words.include?(secret_word)
     letter_arr = secret_word.split('').uniq
     (letter_arr & @player.guessed_letters).size == letter_arr.size
   end
