@@ -24,11 +24,14 @@ class Player
     input
   end
 
+  def register_word_length(length)
+  end
+
   def wrong_answer
     @score < 4 ? @score += 1 : @score = 25
   end
 
-  def right_answer
+  def right_answer(board)
   end
 
   private
