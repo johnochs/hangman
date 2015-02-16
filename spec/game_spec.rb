@@ -160,7 +160,35 @@ describe Game do
         game.stub(:good_guess?) { false }
         game.tick('bat')
       end
-      
+
+    end
+
+  end
+
+  describe '#good_guess?' do
+
+    context 'with a good guess' do
+
+      it 'returns true with a letter' do
+        expect(game.good_guess?('cat', 'a')).to eq(true)
+      end
+
+      it 'returns true with a word' do
+        expect(game.good_guess?('hat', 'hat')).to eq(true)
+      end
+
+    end
+
+    context 'with a bad guess' do
+
+      it 'returns false with a letter' do
+        expect(game.good_guess?('hue', 'b')).to eq(false)
+      end
+
+      it 'returns false with a word' do
+        expect(game.good_guess?('coat', 'boat')).to eq(false)
+      end
+
     end
 
   end
