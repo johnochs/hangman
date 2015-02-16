@@ -49,6 +49,7 @@ describe Game do
       player_double = double
       allow(player_double).to receive(:score).and_return(2)
       allow(player_double).to receive(:guessed_letters).and_return(['a', 'c'])
+      allow(player_double).to receive(:guessed_words).and_return([])
       test_game = Game.new(dictionary, player_double)
       expect(test_game.game_over?('cat')).to eq(false)
     end
@@ -57,6 +58,7 @@ describe Game do
       player_double = double
       allow(player_double).to receive(:score).and_return(7)
       allow(player_double).to receive(:guessed_letters)
+      allow(player_double).to receive(:guessed_words).and_return([])
       expect(player_double).not_to receive(:guessed_letters)
       expect(Game.new(dictionary, player_double).game_over?('nitrogen')).to eq(true)
     end
@@ -64,6 +66,7 @@ describe Game do
     it 'returns true when the player has guessed all the letters of the secret word' do
       player_double = double
       allow(player_double).to receive(:guessed_letters).and_return(['r','l','a','e'])
+      allow(player_double).to receive(:guessed_words).and_return([])
       allow(player_double).to receive(:score).and_return(2)
       expect(Game.new(dictionary, player_double).game_over?('real')).to eq(true)
     end
@@ -71,11 +74,22 @@ describe Game do
     it 'returns true for a variety of words' do
       ['ballet', 'tooth', 'christmas', 'markov', 'level'].each do |word|
         player_double = double
+        allow(player_double).to receive(:guessed_words).and_return([])
         allow(player_double).to receive(:guessed_letters)
             .and_return(word.split('').uniq)
         allow(player_double).to receive(:score).and_return(1)
         expect(Game.new(dictionary, player_double).game_over?(word)).to eq(true)
       end
+    end
+
+    it 'returns true when a player guesses the correct word' do
+      player_double = double
+      allow(player_double).to receive(:guessed_words).and_return(
+          ['tralfamadore', 'venus', 'pluto', 'earth']
+        )
+      allow(player_double).to receive(:score).and_return(2)
+      game = Game.new(dictionary, player_double)
+      expect(game.game_over?('venus')).to eq(true)
     end
   end
 
