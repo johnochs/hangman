@@ -1,5 +1,6 @@
 require_relative('player')
 require_relative('dictionary')
+require_relative('computer_player')
 
 class Game
 
@@ -14,6 +15,7 @@ class Game
 
   def start_game
     secret_word = @dictionary.random_word
+    @player.register_word_length(secret_word.length)
     system('clear')
     puts "Welcome to Hangman, #{@player.name}!"
 
@@ -32,10 +34,10 @@ class Game
     if @player.score < 5
       puts "Congratulations, #{@player.name}!  You won!"
     else
-      puts "Sorry, #{@player.name}.  This just wasn't your game. \n
-            The word was #{secret_word}"
+      puts "Sorry, #{@player.name}.  This just wasn't your game."
     end
     puts "Final Score: #{@player.score}"
+    puts "Word: #{secret_word}"
   end
 
   def game_over?(secret_word)
@@ -64,7 +66,7 @@ class Game
     system('clear')
     if good_guess?(secret_word, guess)
       puts "Good guess!"
-      @player.right_answer
+      @player.right_answer(render(secret_word))
     else
       puts "Nope. :("
       @player.wrong_answer
