@@ -9,7 +9,7 @@ class Game
   attr_reader :dictionary, :player
 
   def initialize(options = {})
-    defaults = {dictionary: Dictionary.new, player: Player.new, quiet: false}
+    defaults = {dictionary: Dictionary.new, player: Player.new, quiet: true}
     options = defaults.merge(options)
     @dictionary = options[:dictionary]
     @player = options[:player]
@@ -47,10 +47,14 @@ class Game
     end
   end
 
+  #Below are methods that can be private.  They are currently exposed for testing.
+  #private
+
   def game_over?(secret_word)
     return true if @player.score >= POINTS_TO_END_GAME
     return true if @player.guessed_words.include?(secret_word)
     letter_arr = secret_word.split('').uniq
+    #Takes the intersection of guessed letters and compares size to secret word.
     (letter_arr & @player.guessed_letters).size == letter_arr.size
   end
 
