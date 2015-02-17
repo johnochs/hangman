@@ -1,3 +1,4 @@
+#A simple test for measuring the average score for a computer player.
 require_relative('game')
 
 scores = []
