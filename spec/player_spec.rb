@@ -113,7 +113,7 @@ describe Player do
     it "doesn't do anything" do
       a_player = player
       b_player = a_player.clone
-      b_player.right_answer
+      b_player.right_answer('someinput')
       expect(a_player.name).to eq(b_player.name)
       expect(a_player.score).to eq(b_player.score)
       expect(a_player.guessed_letters).to eq(b_player.guessed_letters)
