@@ -2,6 +2,8 @@ require 'game'
 require 'player'
 require 'dictionary'
 
+#Tests are performed on the test word set: 'test_words.txt'
+
 describe Game do
 
   subject(:game) do
