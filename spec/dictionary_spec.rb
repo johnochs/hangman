@@ -3,13 +3,12 @@ require 'dictionary'
 describe Dictionary do
 
   subject(:dict) { Dictionary.new('./lib/test_words.txt') }
-
+  cur_dir = Dir.pwd
   describe '#initialize' do
 
-    #TODO: Find out why this test is failing...
-    xit 'reads in a file' do
-      expect(File).to receive(:open)
-      Dictionary.new('.lib/test_words.txt')
+    it 'reads in a file' do
+      dict = Dictionary.new("./lib/test_words.txt")
+      expect(dict.has_word?('aratherunorthodoxword')).to eq(true)
     end
 
     it 'initializes a hash to contain the words' do
