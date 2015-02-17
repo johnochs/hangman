@@ -43,7 +43,7 @@ class HangmanGame
   end
 
   def run_game(player, dictionary = Dictionary.new)
-    game = Game.new(player: player, dictionary: dictionary)
+    game = Game.new(player: player, dictionary: dictionary, quiet: false)
     game.start_game
   end
 
